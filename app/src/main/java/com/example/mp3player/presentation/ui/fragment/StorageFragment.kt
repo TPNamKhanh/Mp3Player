@@ -5,22 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.mp3player.databinding.FragmentMainBinding
+import com.example.mp3player.databinding.StorageFragmentBinding
 
-class MainFragment : Fragment() {
-    private lateinit var binding: FragmentMainBinding
+class StorageFragment : Fragment() {
+    private lateinit var binding: StorageFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding = StorageFragmentBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        with(binding) {}
     }
 }

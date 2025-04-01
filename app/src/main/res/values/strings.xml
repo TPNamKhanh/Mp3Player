@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Mp3Player</string>
     <string name="splash_description">splash screen</string>
+    <string name="lbl_home">Home</string>
+    <string name="lbl_profile">Profile</string>
+    <string name="lbl_storage">Storage</string>
 </resources>

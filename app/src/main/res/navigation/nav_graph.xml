@@ -9,4 +9,14 @@
         android:name="com.example.mp3player.presentation.ui.fragment.MainFragment"
         android:label="MainFragment" />
 
+    <fragment
+        android:id="@+id/storageFragment"
+        android:name="com.example.mp3player.presentation.ui.fragment.StorageFragment"
+        android:label="StorageFragment" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.mp3player.presentation.ui.fragment.ProfileFragment"
+        android:label="ProfileFragment" />
+
 </navigation>
