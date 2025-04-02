@@ -1,7 +1,13 @@
 package com.example.mp3player.presentation.ui.activity
 
+import android.app.UiModeManager
+import android.content.Context
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.mp3player.R
 import com.example.mp3player.databinding.ActivityMainBinding
@@ -24,11 +30,24 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+        setColorForBottomNav()
     }
 
     private fun replaceFragment(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.container, fragment)
         fragmentTransaction.commit()
+    }
+
+    private fun setColorForBottomNav() {
+        val uiModeManager = getSystemService(UI_MODE_SERVICE) as UiModeManager
+        val isDarkMode = uiModeManager.nightMode == UiModeManager.MODE_NIGHT_YES
+//        val isDarkMode = (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+        binding.bottomNavigationMenu.setBackgroundColor(
+            ContextCompat.getColor(
+                this,
+                if (isDarkMode) R.color.black else R.color.white
+            )
+        )
     }
 }

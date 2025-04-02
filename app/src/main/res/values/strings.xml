@@ -4,4 +4,7 @@
     <string name="lbl_home">Home</string>
     <string name="lbl_profile">Profile</string>
     <string name="lbl_storage">Storage</string>
+    <string name="local_search_hint">Search audio and video in your device</string>
+    <string name="local_file_tab">local file tab</string>
+    <string name="item_placeholder">item placeholder</string>
 </resources>

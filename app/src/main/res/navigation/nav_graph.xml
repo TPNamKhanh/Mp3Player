@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/mainFragment">
 
     <fragment
         android:id="@+id/mainFragment"
+        tools:layout="@layout/activity_main"
         android:name="com.example.mp3player.presentation.ui.fragment.MainFragment"
         android:label="MainFragment" />
 
     <fragment
         android:id="@+id/storageFragment"
+        tools:layout="@layout/storage_fragment"
         android:name="com.example.mp3player.presentation.ui.fragment.StorageFragment"
         android:label="StorageFragment" />
 
     <fragment
         android:id="@+id/profileFragment"
+        tools:layout="@layout/profile_fragment"
         android:name="com.example.mp3player.presentation.ui.fragment.ProfileFragment"
         android:label="ProfileFragment" />
 
