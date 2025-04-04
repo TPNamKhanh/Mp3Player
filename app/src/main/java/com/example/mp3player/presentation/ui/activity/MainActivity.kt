@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         checkPermission()
+        checkVideoPermission()
         binding.bottomNavigationMenu.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.itHome -> replaceFragment(MainFragment())
@@ -64,6 +65,13 @@ class MainActivity : AppCompatActivity() {
                 permission
             ) != PackageManager.PERMISSION_GRANTED
         ) {
+            requestPermissionLauncher.launch(permission)
+        }
+    }
+
+    private fun checkVideoPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val permission = Manifest.permission.READ_MEDIA_VIDEO
             requestPermissionLauncher.launch(permission)
         }
     }

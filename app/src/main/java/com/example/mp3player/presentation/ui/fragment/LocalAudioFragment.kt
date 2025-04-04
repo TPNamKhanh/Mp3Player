@@ -1,6 +1,7 @@
 package com.example.mp3player.presentation.ui.fragment
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +32,7 @@ class LocalAudioFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            addDivider()
+            rvAudioList.addItemDecoration(addDivider(requireContext()))
             adapter = LocalItemAdapter(emptyList(), isAudio = true)
             rvAudioList.adapter = adapter
             lifecycleScope.launch {
@@ -44,8 +45,10 @@ class LocalAudioFragment : Fragment() {
         }
     }
 
-    private fun addDivider() {
-        val divider = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-        binding.rvAudioList.addItemDecoration(divider)
+    companion object {
+        fun addDivider(context: Context): DividerItemDecoration {
+            val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+            return divider
+        }
     }
 }
