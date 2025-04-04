@@ -1,12 +1,12 @@
 package com.example.mp3player.presentation.ui.activity
 
+import android.Manifest
 import android.app.UiModeManager
-import android.content.Context
-import android.content.res.Configuration
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.mp3player.R
@@ -17,10 +17,14 @@ import com.example.mp3player.presentation.ui.fragment.StorageFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean -> }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        checkPermission()
         binding.bottomNavigationMenu.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.itHome -> replaceFragment(MainFragment())
@@ -49,5 +53,18 @@ class MainActivity : AppCompatActivity() {
                 if (isDarkMode) R.color.black else R.color.white
             )
         )
+    }
+
+    private fun checkPermission() {
+        val permission =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) Manifest.permission.READ_MEDIA_AUDIO
+            else Manifest.permission.READ_EXTERNAL_STORAGE
+        if (ContextCompat.checkSelfPermission(
+                this@MainActivity,
+                permission
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissionLauncher.launch(permission)
+        }
     }
 }

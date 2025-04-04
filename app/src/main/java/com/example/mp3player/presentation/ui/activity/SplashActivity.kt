@@ -4,15 +4,16 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import com.example.mp3player.R
+import com.example.mp3player.databinding.ActivitySplashBinding
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
-        findViewById<ConstraintLayout>(R.id.splash).postDelayed({ openMainActivity() }, 3000L)
+        val binding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.splash.postDelayed({ openMainActivity() }, 3000L)
     }
 
     private fun openMainActivity() {

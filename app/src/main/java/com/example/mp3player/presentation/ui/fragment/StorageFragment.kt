@@ -42,7 +42,6 @@ class StorageFragment : Fragment() {
             TabLayoutMediator(tlStorage, vpStorageData) { tab, position ->
                 tab.text = tabList[position]
             }.attach()
-            viewModel.number
         }
     }
 }
