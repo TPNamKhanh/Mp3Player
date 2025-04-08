@@ -31,6 +31,13 @@
         <activity
             android:name=".presentation.ui.activity.MainActivity"
             android:exported="false" />
+        <activity
+            android:name=".presentation.ui.activity.PlayMp3Activity"
+            android:exported="false" />
+
+        <service
+            android:name=".domain.services.Mp3Service"
+            android:exported="false" />
     </application>
 
 </manifest>

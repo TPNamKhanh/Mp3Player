@@ -2,10 +2,12 @@
 
 package com.example.mp3player.di
 
+import com.example.mp3player.presentation.viewmodel.PlayMp3ViewModel
 import com.example.mp3player.presentation.viewmodel.StorageViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModelOf(::StorageViewModel)
+    viewModelOf(::PlayMp3ViewModel)
 }

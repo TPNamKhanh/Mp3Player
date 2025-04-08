@@ -1,9 +1,12 @@
 package com.example.mp3player.domain.model
 
+import java.io.Serializable
+
 data class LocalItem(
-    val id: Int,
-    val name: String,
-    val author: String,
-    val avatar: String? = "",
-    val data: String,
-)
+    var id: Int,
+    var name: String,
+    var author: String,
+    var avatar: String? = "",
+    var data: String,
+    var duration: Int,
+) : Serializable

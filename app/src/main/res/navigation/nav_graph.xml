@@ -7,20 +7,25 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        tools:layout="@layout/activity_main"
         android:name="com.example.mp3player.presentation.ui.fragment.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment"
+        tools:layout="@layout/activity_main" />
 
     <fragment
         android:id="@+id/storageFragment"
-        tools:layout="@layout/storage_fragment"
         android:name="com.example.mp3player.presentation.ui.fragment.StorageFragment"
-        android:label="StorageFragment" />
+        android:label="StorageFragment"
+        tools:layout="@layout/storage_fragment" />
 
     <fragment
         android:id="@+id/profileFragment"
-        tools:layout="@layout/profile_fragment"
         android:name="com.example.mp3player.presentation.ui.fragment.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment"
+        tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/fragmentPlayMp3"
+        android:name="com.example.mp3player.presentation.ui.fragment.PlayingMp3Fragment"
+        android:label="FragmentPlayingMp3"
+        tools:layout="@layout/fragment_play_mp3" />
 
 </navigation>
