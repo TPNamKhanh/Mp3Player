@@ -47,6 +47,7 @@ dependencies {
     implementation(libs.koin.androidx.navigation)
     implementation(libs.koin.core.coroutines)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.eventbus)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.koin.core.coroutines)

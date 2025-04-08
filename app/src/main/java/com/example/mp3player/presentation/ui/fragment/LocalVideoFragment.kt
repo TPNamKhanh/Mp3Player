@@ -30,7 +30,9 @@ class LocalVideoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             rvVideoList.addItemDecoration(LocalAudioFragment.Companion.addDivider(requireContext()))
-            adapter = LocalItemAdapter(emptyList())
+            adapter = LocalItemAdapter(emptyList()) {
+
+            }
             rvVideoList.adapter = adapter
             lifecycleScope.launch {
                 viewModel.videos.collect { list ->

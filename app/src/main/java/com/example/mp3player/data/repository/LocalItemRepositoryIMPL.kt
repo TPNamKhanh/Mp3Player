@@ -15,7 +15,8 @@ class LocalItemRepositoryIMPL(private val resolver: ContentResolver) : ILocalIte
             Audio.Media.DATA,
             Audio.Media.AUTHOR,
             Audio.Media.DISPLAY_NAME,
-            Audio.Media._ID
+            Audio.Media._ID,
+            Audio.Media.DURATION
         )
         val orderBy = "${Audio.Media.DISPLAY_NAME} ASC"
 
@@ -34,11 +35,13 @@ class LocalItemRepositoryIMPL(private val resolver: ContentResolver) : ILocalIte
                 val dataIndex = cursor.getColumnIndex(Audio.Media.DATA)
                 val authorIndex = cursor.getColumnIndex(Audio.Media.AUTHOR)
                 val idIndex = cursor.getColumnIndex(Audio.Media._ID)
+                val durationIndex = cursor.getColumnIndex(Audio.Media.DURATION)
                 val localItem = LocalItem(
                     id = cursor.getInt(idIndex),
                     name = cursor.getString(nameIndex),
                     author = cursor.getString(authorIndex) ?: "Unknown",
-                    data = cursor.getString(dataIndex)
+                    data = cursor.getString(dataIndex),
+                    duration = cursor.getInt(durationIndex)
                 )
                 audioList.add(localItem)
             }
@@ -52,7 +55,8 @@ class LocalItemRepositoryIMPL(private val resolver: ContentResolver) : ILocalIte
             Video.Media.DATA,
             Video.Media.AUTHOR,
             Video.Media.DISPLAY_NAME,
-            Video.Media._ID
+            Video.Media._ID,
+            Video.Media.DURATION,
         )
         val orderBy = "${Video.Media.DISPLAY_NAME} ASC"
 
@@ -70,11 +74,13 @@ class LocalItemRepositoryIMPL(private val resolver: ContentResolver) : ILocalIte
                 val dataIndex = cursor.getColumnIndex(Video.Media.DATA)
                 val authorIndex = cursor.getColumnIndex(Video.Media.AUTHOR)
                 val idIndex = cursor.getColumnIndex(Video.Media._ID)
+                val durationIndex =  cursor.getColumnIndex(Video.Media.DURATION)
                 val localItem = LocalItem(
                     id = cursor.getInt(idIndex),
                     name = cursor.getString(nameIndex),
                     author = cursor.getString(authorIndex) ?: "Unknown",
-                    data = cursor.getString(dataIndex)
+                    data = cursor.getString(dataIndex),
+                    duration = cursor.getInt(durationIndex)
                 )
                 videos.add(localItem)
             }
