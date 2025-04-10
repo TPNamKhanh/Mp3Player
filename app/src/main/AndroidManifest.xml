@@ -33,10 +33,11 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.activity.PlayMp3Activity"
+            android:configChanges="screenSize|smallestScreenSize|orientation"
             android:exported="false" />
 
         <service
-            android:name=".domain.services.Mp3Service"
+            android:name=".domain.services.AudioService"
             android:exported="false" />
     </application>
 

@@ -9,16 +9,15 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.mp3player.domain.model.LocalItem
-import com.example.mp3player.domain.services.Mp3Service
+import com.example.mp3player.domain.services.AudioService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
 class PlayMp3ViewModel() : ViewModel() {
     @SuppressLint("StaticFieldLeak")
-    private var mp3Service = Mp3Service()
+    private var mp3Service = AudioService()
     private var currentPosition: Int? = null
     private var items: List<LocalItem> = listOf()
     private var isConnected: Boolean = false
@@ -42,7 +41,8 @@ class PlayMp3ViewModel() : ViewModel() {
     private lateinit var serviceConnection: PlayMp3ServiceConnection
 
     fun bindMp3Service(context: Context) {
-        val intent = Intent(context, Mp3Service::class.java)
+        initConnection(context)
+        val intent = Intent(context, AudioService::class.java)
         context.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
     }
 
@@ -51,7 +51,7 @@ class PlayMp3ViewModel() : ViewModel() {
     ) {
         if (currentPosition == null) return
         isPlaying = true
-        val intent = Intent(context, Mp3Service::class.java)
+        val intent = Intent(context, AudioService::class.java)
         val bundle = Bundle()
         bundle.putSerializable("mp3_file", currentPosition!!)
         intent.putExtras(bundle)
@@ -154,7 +154,7 @@ class PlayMp3ViewModel() : ViewModel() {
             name: ComponentName?,
             service: IBinder?
         ) {
-            val binder = service as Mp3Service.Mp3Binder
+            val binder = service as AudioService.Mp3Binder
             mp3Service = binder.getService()
             isConnected = true
             mp3Service.setup(items)

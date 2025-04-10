@@ -4,13 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.fragment.app.FragmentContainerView
-
-        android:id="@+id/storage_nav_graph"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <androidx.media3.ui.PlayerView
+        android:id="@+id/pvPlayAudio"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/storage_nav_graph" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

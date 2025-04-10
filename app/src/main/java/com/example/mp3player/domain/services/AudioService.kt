@@ -9,7 +9,7 @@ import com.example.mp3player.domain.model.LocalItem
 import com.example.mp3player.utils.MediaPlayerManager
 
 @Suppress("DEPRECATION")
-class Mp3Service : Service() {
+class AudioService : Service() {
     private val mBinder = Mp3Binder()
     private var mCurrentPosition: Int? = null
     private var medialPlayerManager: MediaPlayerManager? = null
@@ -17,7 +17,7 @@ class Mp3Service : Service() {
     var isPlaying: Boolean = false
 
     inner class Mp3Binder : Binder() {
-        fun getService(): Mp3Service = this@Mp3Service
+        fun getService(): AudioService = this@AudioService
     }
 
     override fun onBind(intent: Intent?): IBinder? {
@@ -28,7 +28,6 @@ class Mp3Service : Service() {
         val bundle = intent?.extras
         if (bundle != null) {
             val currentPosition = bundle.getSerializable("mp3_file") as Int?
-            Log.d("TAG", "onStartCommand: $currentPosition -- $items")
             if (currentPosition != null) {
                 var isNext = false
                 if (currentPosition != mCurrentPosition) {
