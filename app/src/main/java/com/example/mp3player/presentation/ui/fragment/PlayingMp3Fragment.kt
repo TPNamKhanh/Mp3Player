@@ -17,7 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.mp3player.R
 import com.example.mp3player.databinding.FragmentPlayMp3Binding
 import com.example.mp3player.domain.model.AudioData
-import com.example.mp3player.domain.services.Mp3Service
+import com.example.mp3player.domain.services.AudioService
 import com.example.mp3player.presentation.viewmodel.PlayMp3ViewModel
 import com.example.mp3player.utils.isDarkModeEnabled
 import kotlinx.coroutines.flow.collectLatest
@@ -32,9 +32,8 @@ class PlayingMp3Fragment : Fragment() {
     private val viewModel: PlayMp3ViewModel by viewModel()
     private val completeMediaReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            Log.d("TAG", "onReceive: ${intent?.action}")
             when (intent?.action) {
-                Mp3Service.PROCESS_SEEKBAR -> {
+                AudioService.PROCESS_SEEKBAR -> {
                     viewModel.processSeekBar()
                 }
             }
@@ -54,7 +53,6 @@ class PlayingMp3Fragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.initConnection(requireContext())
         viewModel.bindMp3Service(requireContext())
         with(binding) {
             if (!isDarkModeEnabled(requireContext())) {
@@ -139,8 +137,8 @@ class PlayingMp3Fragment : Fragment() {
         super.onStart()
         EventBus.getDefault().register(this)
         val intentFilter = IntentFilter().apply {
-            addAction(Mp3Service.MEDIA_COMPLETE_KEY)
-            addAction(Mp3Service.PROCESS_SEEKBAR)
+            addAction(AudioService.MEDIA_COMPLETE_KEY)
+            addAction(AudioService.PROCESS_SEEKBAR)
         }
         ContextCompat.registerReceiver(
             requireContext(),

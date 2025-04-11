@@ -9,4 +9,10 @@
         android:name="com.example.mp3player.presentation.ui.fragment.PlayingMp3Fragment"
         android:label="FragmentPlayingMp3"
         tools:layout="@layout/fragment_play_mp3" />
+
+    <fragment
+        android:id="@+id/fragmentPlayVideo"
+        android:name="com.example.mp3player.presentation.ui.fragment.PlayVideoFragment"
+        android:label="FragmentPlayVideo"
+        tools:layout="@layout/fragment_local_video" />
 </navigation>

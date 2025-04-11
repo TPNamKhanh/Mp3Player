@@ -1,5 +1,6 @@
 package com.example.mp3player.presentation.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.mp3player.databinding.FragmentLocalVideoBinding
+import com.example.mp3player.domain.model.AudioData
 import com.example.mp3player.presentation.adapter.LocalItemAdapter
+import com.example.mp3player.presentation.ui.activity.PlayMp3Activity
 import com.example.mp3player.presentation.viewmodel.StorageViewModel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.greenrobot.eventbus.EventBus
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LocalVideoFragment : Fragment() {
@@ -30,17 +35,26 @@ class LocalVideoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             rvVideoList.addItemDecoration(LocalAudioFragment.Companion.addDivider(requireContext()))
-            adapter = LocalItemAdapter(emptyList()) {
-
-            }
-            rvVideoList.adapter = adapter
             lifecycleScope.launch {
-                viewModel.videos.collect { list ->
+                viewModel.videos.collectLatest { list ->
+                    adapter = LocalItemAdapter(emptyList()) { position ->
+                        EventBus.getDefault().postSticky(AudioData(position, list))
+                        startVideoActivity()
+                    }
+                    rvVideoList.adapter = adapter
                     if (!list.isEmpty()) {
                         adapter.updateItem(list)
                     }
                 }
             }
         }
+    }
+
+    private fun startVideoActivity() {
+        val intent = Intent(requireContext(), PlayMp3Activity::class.java)
+        val bundle = Bundle()
+        bundle.putBoolean(PlayMp3Activity.IS_PLAY_VIDEO, true)
+        intent.putExtras(bundle)
+        startActivity(intent)
     }
 }
