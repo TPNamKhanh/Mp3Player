@@ -4,7 +4,6 @@ import android.app.Service
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
-import android.util.Log
 import com.example.mp3player.domain.model.LocalItem
 import com.example.mp3player.utils.MediaPlayerManager
 
@@ -27,7 +26,11 @@ class AudioService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val bundle = intent?.extras
         if (bundle != null) {
-            val currentPosition = bundle.getSerializable("mp3_file") as Int?
+            val isStopService = bundle.getBoolean(IS_STOP_SERVICE, false)
+            if (isStopService) {
+                stopAudioService()
+            }
+            val currentPosition = bundle.getSerializable(MP3_FILE) as Int?
             if (currentPosition != null) {
                 var isNext = false
                 if (currentPosition != mCurrentPosition) {
@@ -39,6 +42,12 @@ class AudioService : Service() {
             }
         }
         return START_NOT_STICKY
+    }
+
+    private fun stopAudioService() {
+        isPlaying = false
+        medialPlayerManager?.release()
+        medialPlayerManager = null
     }
 
     private fun startAudio(isNext: Boolean = false) {
@@ -82,5 +91,7 @@ class AudioService : Service() {
     companion object {
         const val PROCESS_SEEKBAR = "com.example.mp3player.process_seekbar"
         const val MEDIA_COMPLETE_KEY = "MediaIsComplete"
+        const val MP3_FILE = "mp3_file"
+        const val IS_STOP_SERVICE = "is_stop_service"
     }
 }

@@ -32,7 +32,6 @@ class PlayingMp3Fragment : Fragment() {
     private val viewModel: PlayMp3ViewModel by viewModel()
     private val completeMediaReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            Log.d("TAG", "onReceive: ${intent?.action}")
             when (intent?.action) {
                 AudioService.PROCESS_SEEKBAR -> {
                     viewModel.processSeekBar()

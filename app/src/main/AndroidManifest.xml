@@ -33,7 +33,9 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.activity.PlayMp3Activity"
-            android:configChanges="screenSize|smallestScreenSize|orientation"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:supportsPictureInPicture="true"
+            android:launchMode="singleTask"
             android:exported="false" />
 
         <service

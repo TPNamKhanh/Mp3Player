@@ -18,6 +18,14 @@ class PlayMp3Activity : AppCompatActivity() {
         }
     }
 
+    override fun onUserLeaveHint() {
+        super.onUserLeaveHint()
+        val fragment = supportFragmentManager.findFragmentById(R.id.storage_nav_graph)
+        if(fragment is PlayVideoFragment) {
+            fragment.enterPipModeFromFragment()
+        }
+    }
+
     private fun changeStartDestination() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.storage_nav_graph, PlayVideoFragment())

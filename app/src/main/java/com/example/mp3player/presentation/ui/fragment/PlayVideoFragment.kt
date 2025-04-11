@@ -1,7 +1,9 @@
 package com.example.mp3player.presentation.ui.fragment
 
+import android.app.PictureInPictureParams
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.util.Rational
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +31,7 @@ class PlayVideoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.stopService(requireContext())
         viewModel.initExoPlayer(requireContext())
         with(binding) {
             pvPlayAudio.player = viewModel.exoPlayer
@@ -54,5 +57,14 @@ class PlayVideoFragment : Fragment() {
     fun getVideos(videos: AudioData) {
         viewModel.updateVideos(videos)
         viewModel.startVideo()
+    }
+
+    fun enterPipModeFromFragment() {
+        val activity = requireActivity()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val pipParams = PictureInPictureParams.Builder()
+                .setAspectRatio(Rational(16, 9)).build()
+            activity.enterPictureInPictureMode(pipParams)
+        }
     }
 }
