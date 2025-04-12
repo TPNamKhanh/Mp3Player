@@ -59,15 +59,21 @@ class MainActivity : AppCompatActivity() {
         val permission =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) arrayOf(
                 Manifest.permission.READ_MEDIA_AUDIO,
-                Manifest.permission.READ_MEDIA_VIDEO
+                Manifest.permission.READ_MEDIA_VIDEO,
+                Manifest.permission.POST_NOTIFICATIONS,
             )
-            else arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+            else arrayOf(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.POST_NOTIFICATIONS
+                ,
+            )
 
-        val notGrantedPermisison = permission.filter {
+        val notGrantedPermission = permission.filter {
             ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
         }.toTypedArray()
 
-        if (notGrantedPermisison.isNotEmpty()) {
+        if (notGrantedPermission.isNotEmpty()) {
             requestPermissionLauncher.launch(permission)
         }
     }

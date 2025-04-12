@@ -55,7 +55,7 @@ class PlayMp3ViewModel() : ViewModel() {
         val bundle = Bundle()
         bundle.putSerializable(AudioService.MP3_FILE, currentPosition!!)
         intent.putExtras(bundle)
-        context.startService(intent)
+        context.startForegroundService(intent)
     }
 
     fun onNext(context: Context) {

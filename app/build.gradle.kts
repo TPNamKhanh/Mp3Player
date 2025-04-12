@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.media3.exoplayer.dash)
+    implementation(libs.androidx.media)
     implementation("androidx.media3:media3-ui:1.6.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
