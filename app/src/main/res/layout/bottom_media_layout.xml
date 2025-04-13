@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/purple_200"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/imgPlaceHolder"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/ic_placeholder" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_toStartOf="@id/imgSkipPrev"
+        android:layout_toEndOf="@id/imgPlaceHolder"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvAudioTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:text="Audio Title"
+            tools:text="Audio Title" />
+
+        <TextView
+            android:id="@+id/tvAuthorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:text="Unknow"
+            android:textColor="@color/black"
+            tools:text="Unknow" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgSkipPrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/imgPlayOrPause"
+        android:src="@drawable/ic_skip_previous" />
+
+    <ImageView
+        android:id="@+id/imgPlayOrPause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="10dp"
+        android:layout_toStartOf="@id/imgSkipNext"
+        android:src="@drawable/ic_play_circle" />
+
+    <ImageView
+        android:id="@+id/imgSkipNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_skip_next" />
+
+</RelativeLayout>
