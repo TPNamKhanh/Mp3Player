@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/rlBottomNavigationLayout"
     android:background="@color/purple_200"
     android:padding="5dp">
 
@@ -14,6 +15,7 @@
         android:src="@drawable/ic_placeholder" />
 
     <LinearLayout
+        android:id="@+id/llAudioInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"

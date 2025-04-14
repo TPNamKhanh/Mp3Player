@@ -88,7 +88,7 @@ class PlayMp3ViewModel() : ViewModel() {
     }
 
     fun processSeekBar() {
-        handler.post(runnable)
+            handler.post(runnable)
     }
 
     fun unProcessSeekBar() {

@@ -57,6 +57,7 @@ class LocalAudioFragment : Fragment() {
 
     private fun startPlayMp3Activity() {
         val intent = Intent(requireContext(), PlayMp3Activity::class.java)
+        intent.action = "IS_AUDIO"
         startActivity(intent)
     }
 

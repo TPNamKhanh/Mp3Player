@@ -9,4 +9,5 @@ data class LocalItem(
     var avatar: String? = "",
     var data: String,
     var duration: Int,
+    var isPlaying: Boolean = false,
 ) : Serializable

@@ -52,9 +52,7 @@ class LocalVideoFragment : Fragment() {
 
     private fun startVideoActivity() {
         val intent = Intent(requireContext(), PlayMp3Activity::class.java)
-        val bundle = Bundle()
-        bundle.putBoolean(PlayMp3Activity.IS_PLAY_VIDEO, true)
-        intent.putExtras(bundle)
+        intent.action = "IS_VIDEO"
         startActivity(intent)
     }
 }

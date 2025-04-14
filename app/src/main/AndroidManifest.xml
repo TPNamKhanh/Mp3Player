@@ -35,12 +35,11 @@
             android:name=".presentation.ui.activity.PlayMp3Activity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:supportsPictureInPicture="true"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:exported="false" />
 
         <service
             android:name=".domain.services.AudioService"
             android:exported="false" />
     </application>
-
 </manifest>
