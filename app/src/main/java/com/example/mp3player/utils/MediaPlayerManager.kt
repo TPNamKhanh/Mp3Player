@@ -39,4 +39,8 @@ class MediaPlayerManager {
     fun seekTo(progress: Int) {
         mediaPlayer?.seekTo(progress)
     }
+
+    fun stop() {
+        mediaPlayer?.stop()
+    }
 }

@@ -52,7 +52,6 @@ class PlayingMp3Fragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.bindMp3Service(requireContext())
         with(binding) {
             if (!isDarkModeEnabled(requireContext())) {
                 btnPlayOrPause.setImageResource(R.drawable.ic_pause_circle)
@@ -134,6 +133,7 @@ class PlayingMp3Fragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        viewModel.bindMp3Service(requireContext())
         EventBus.getDefault().register(this)
         val intentFilter = IntentFilter().apply {
             addAction(AudioService.MEDIA_COMPLETE_KEY)
@@ -151,16 +151,13 @@ class PlayingMp3Fragment : Fragment() {
         super.onStop()
         EventBus.getDefault().unregister(this)
         requireContext().unregisterReceiver(completeMediaReceiver)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
         with(viewModel) {
             if (getConnectedStatus()) {
                 unbindMp3Service(requireContext())
             }
         }
     }
+
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     fun onReceiveEvent(data: AudioData) {

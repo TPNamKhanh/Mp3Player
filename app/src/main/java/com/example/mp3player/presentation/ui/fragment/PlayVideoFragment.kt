@@ -1,7 +1,6 @@
 package com.example.mp3player.presentation.ui.fragment
 
 import android.app.PictureInPictureParams
-import android.os.Build
 import android.os.Bundle
 import android.util.Rational
 import android.view.LayoutInflater
@@ -61,10 +60,8 @@ class PlayVideoFragment : Fragment() {
 
     fun enterPipModeFromFragment() {
         val activity = requireActivity()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val pipParams = PictureInPictureParams.Builder()
-                .setAspectRatio(Rational(16, 9)).build()
-            activity.enterPictureInPictureMode(pipParams)
-        }
+        val pipParams = PictureInPictureParams.Builder()
+            .setAspectRatio(Rational(16, 9)).build()
+        activity.enterPictureInPictureMode(pipParams)
     }
 }

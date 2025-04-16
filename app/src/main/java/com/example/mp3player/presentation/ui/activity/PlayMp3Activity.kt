@@ -1,38 +1,56 @@
 package com.example.mp3player.presentation.ui.activity
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
 import com.example.mp3player.R
-import com.example.mp3player.presentation.ui.fragment.PlayVideoFragment
-import com.example.mp3player.presentation.ui.fragment.PlayingMp3Fragment
+import com.example.mp3player.presentation.ui.activity.PlayVideoActivity.Companion.MOVE_TASK_TO_BACK_VIDEO
 
 class PlayMp3Activity : AppCompatActivity() {
+    private val receiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            val action = intent?.action
+            if (action != null && action == MOVE_TASK_TO_BACK_MP3) {
+                moveTaskToBack(true)
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play_mp3)
-        val action = intent.action
-        when(action) {
-            "IS_VIDEO" -> changeStartDestination(PlayVideoFragment())
-            "IS_AUDIO" -> changeStartDestination(PlayingMp3Fragment())
-        }
+        stopVideo()
     }
 
-    override fun onUserLeaveHint() {
-        super.onUserLeaveHint()
-        val fragment = supportFragmentManager.findFragmentById(R.id.storage_nav_graph)
-        if(fragment is PlayVideoFragment) {
-            fragment.enterPipModeFromFragment()
-        }
+    private fun stopVideo() {
+        val intent = Intent(MOVE_TASK_TO_BACK_VIDEO)
+        sendBroadcast(intent)
     }
 
-    private fun changeStartDestination(fragment: Fragment) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.storage_nav_graph, fragment)
-        fragmentTransaction.commit()
+    override fun onStart() {
+        super.onStart()
+        val intentFilter = IntentFilter().apply {
+            addAction(MOVE_TASK_TO_BACK_MP3)
+        }
+        ContextCompat.registerReceiver(
+            this,
+            receiver,
+            intentFilter,
+            ContextCompat.RECEIVER_NOT_EXPORTED,
+        )
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        this.unregisterReceiver(receiver)
     }
 
     companion object {
-        const val IS_PLAY_VIDEO = "is_play_video"
+        const val MOVE_TASK_TO_BACK_MP3 = "move_task_to_back_mp3"
     }
 }

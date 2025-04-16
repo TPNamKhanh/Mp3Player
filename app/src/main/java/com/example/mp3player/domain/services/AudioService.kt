@@ -37,14 +37,11 @@ class AudioService : Service() {
 
                 PREV_ACTION -> prev()
                 NEXT_ACTION -> next()
+                IS_STOP_SERVICE -> stopAudioService()
             }
         } else {
             val bundle = intent?.extras
             if (bundle != null) {
-                val isStopService = bundle.getBoolean(IS_STOP_SERVICE, false)
-                if (isStopService) {
-                    stopAudioService()
-                }
                 val currentPosition = bundle.getSerializable(MP3_FILE) as Int?
                 if (currentPosition != null) {
                     var isNext = false
@@ -62,8 +59,10 @@ class AudioService : Service() {
 
     private fun stopAudioService() {
         isPlaying = false
+        medialPlayerManager?.stop()
         medialPlayerManager?.release()
         medialPlayerManager = null
+        sendBroadcast(Intent(IS_STOP_SERVICE))
     }
 
     private fun startAudio(isNext: Boolean = false) {

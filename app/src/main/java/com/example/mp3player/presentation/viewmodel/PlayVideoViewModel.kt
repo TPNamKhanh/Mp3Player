@@ -38,9 +38,7 @@ class PlayVideoViewModel() : ViewModel() {
 
     fun stopService(context: Context) {
         val intent = Intent(context, AudioService::class.java)
-        val bundle = Bundle()
-        bundle.putBoolean(AudioService.IS_STOP_SERVICE, true)
-        intent.putExtras(bundle)
+        intent.action = AudioService.IS_STOP_SERVICE
         context.startService(intent)
     }
 

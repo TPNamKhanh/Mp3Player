@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.mp3player.databinding.FragmentLocalVideoBinding
 import com.example.mp3player.domain.model.AudioData
 import com.example.mp3player.presentation.adapter.LocalItemAdapter
-import com.example.mp3player.presentation.ui.activity.PlayMp3Activity
+import com.example.mp3player.presentation.ui.activity.PlayVideoActivity
 import com.example.mp3player.presentation.viewmodel.StorageViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -51,8 +51,7 @@ class LocalVideoFragment : Fragment() {
     }
 
     private fun startVideoActivity() {
-        val intent = Intent(requireContext(), PlayMp3Activity::class.java)
-        intent.action = "IS_VIDEO"
+        val intent = Intent(requireContext(), PlayVideoActivity::class.java)
         startActivity(intent)
     }
 }

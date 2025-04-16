@@ -57,6 +57,10 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                     }
+
+                    AudioService.IS_STOP_SERVICE -> {
+                        bottomMediaBinding.root.visibility = View.GONE
+                    }
                 }
             }
         }
@@ -108,6 +112,7 @@ class MainActivity : AppCompatActivity() {
             addAction(AudioService.PLAY_ACTION)
             addAction(AudioService.PAUSE_ACTION)
             addAction(AudioService.UPDATE_ITEM)
+            addAction(AudioService.IS_STOP_SERVICE)
         }
         ContextCompat.registerReceiver(
             this,
@@ -211,9 +216,7 @@ class MainActivity : AppCompatActivity() {
 
     fun stopService() {
         val intent = Intent(this, AudioService::class.java)
-        val bundle = Bundle()
-        bundle.putBoolean(AudioService.IS_STOP_SERVICE, true)
-        intent.putExtras(bundle)
+        intent.action = AudioService.IS_STOP_SERVICE
         startService(intent)
     }
 

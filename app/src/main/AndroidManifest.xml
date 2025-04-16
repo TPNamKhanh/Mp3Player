@@ -34,10 +34,15 @@
         <activity
             android:name=".presentation.ui.activity.PlayMp3Activity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
-            android:supportsPictureInPicture="true"
+            android:exported="false"
             android:launchMode="singleTop"
-            android:exported="false" />
-
+            android:supportsPictureInPicture="true" />
+        <activity
+            android:name=".presentation.ui.activity.PlayVideoActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:supportsPictureInPicture="true" />
         <service
             android:name=".domain.services.AudioService"
             android:exported="false" />
